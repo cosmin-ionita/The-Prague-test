@@ -34,32 +34,35 @@
             // 
             // bigNumber
             // 
-            this.bigNumber.AutoSize = true;
-            this.bigNumber.Location = new System.Drawing.Point(31, 31);
+            this.bigNumber.Dock = System.Windows.Forms.DockStyle.Top;
+            this.bigNumber.Location = new System.Drawing.Point(0, 0);
             this.bigNumber.Name = "bigNumber";
-            this.bigNumber.Size = new System.Drawing.Size(62, 13);
+            this.bigNumber.Size = new System.Drawing.Size(111, 13);
             this.bigNumber.TabIndex = 0;
             this.bigNumber.Text = "Big Number";
+            this.bigNumber.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // smallNumber
             // 
-            this.smallNumber.AutoSize = true;
-            this.smallNumber.Location = new System.Drawing.Point(31, 79);
+            this.smallNumber.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.smallNumber.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.smallNumber.Location = new System.Drawing.Point(0, 99);
             this.smallNumber.Name = "smallNumber";
-            this.smallNumber.Size = new System.Drawing.Size(72, 13);
+            this.smallNumber.Size = new System.Drawing.Size(111, 13);
             this.smallNumber.TabIndex = 1;
             this.smallNumber.Text = "Small Number";
+            this.smallNumber.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Numbers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Controls.Add(this.smallNumber);
             this.Controls.Add(this.bigNumber);
             this.Name = "Numbers";
-            this.Size = new System.Drawing.Size(140, 127);
+            this.Size = new System.Drawing.Size(111, 112);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
