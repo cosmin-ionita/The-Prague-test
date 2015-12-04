@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
+using ThePragueTestControls;
 
 namespace ThePragueTest
 {
@@ -15,6 +8,10 @@ namespace ThePragueTest
         public Form1()
         {
             InitializeComponent();
+
+            Numbers numberControl = new Numbers(200, 300, 2, 1);
+
+            panel1.Controls.Add(numberControl);
         }
     }
 }
