@@ -28,13 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            this.timer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
+            // 
+            // timer
+            // 
+            this.timer.Interval = 1000;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(529, 207);
+            this.ClientSize = new System.Drawing.Size(529, 217);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Form1";
             this.Text = "The Prague Test";
@@ -44,6 +50,8 @@
         }
 
         #endregion
+
+        private System.Windows.Forms.Timer timer;
     }
 }
 

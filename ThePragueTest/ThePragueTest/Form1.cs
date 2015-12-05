@@ -13,6 +13,11 @@ namespace ThePragueTest
         Panel numbersSurface = new Panel();
         Panel answersSurface = new Panel();
 
+        TimeSpan time = new TimeSpan(0, 4, 0);
+        TimeSpan second = new TimeSpan(0, 0, 1);
+
+        Label timeView = new Label();
+
         public Form1()
         {
             InitializeComponent();
@@ -23,6 +28,34 @@ namespace ThePragueTest
 
             InitializeNumbersSurface();
             InitializeAnswersSurface();
+
+            CustomizeTimeView();
+
+            SetTimer();
+        }
+
+        private void CustomizeTimeView()
+        {
+            answersSurface.Controls.Add(timeView);
+
+            timeView.Dock = DockStyle.Top;
+            timeView.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            timeView.AutoSize = false;
+
+            timeView.Font = new System.Drawing.Font("Times New Roman", 14, System.Drawing.FontStyle.Bold);
+        }
+
+        private void SetTimer()
+        {
+            timer.Tick += new EventHandler(timer_Tick);
+            timer.Start();
+        }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            time = time.Subtract(second);
+            timeView.Text = time.ToString().Split(':')[1] + ":" +
+                            time.ToString().Split(':')[2];
         }
 
         private void InitializeAnswersSurface()
