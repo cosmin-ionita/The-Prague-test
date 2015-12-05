@@ -16,6 +16,8 @@ namespace ThePragueTest
         TimeSpan time = new TimeSpan(0, 4, 0);
         TimeSpan second = new TimeSpan(0, 0, 1);
 
+        TextBox[] inputs = new TextBox[100];
+
         Label timeView = new Label();
 
         public Form1()
@@ -31,9 +33,70 @@ namespace ThePragueTest
 
             CustomizeTimeView();
 
+            CreateRightBarFunctionality();
+
             SetTimer();
         }
 
+        private void CreateRightBarFunctionality()
+        {
+            CreateExitButton();
+            CreateCheckButton();
+            
+        }
+
+        private void CreateCheckButton()
+        {
+            Button checkButton = new Button();
+
+            int buttonWidth = answersSurface.Width / 13;
+            int buttonHeight = 2 * answersSurface.Height / 27 - 10;
+
+            checkButton.Text = "Check";
+
+            checkButton.AutoSize = false;
+            checkButton.Size = new System.Drawing.Size(buttonWidth, buttonHeight);
+
+            checkButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            checkButton.Location = new System.Drawing.Point(answersSurface.Width - buttonWidth - 4,
+                                                            answersSurface.Height - 2 * buttonHeight);
+
+            checkButton.Click += new EventHandler(check_Click);
+
+            answersSurface.Controls.Add(checkButton);
+        }
+
+        private void check_Click(object sender, EventArgs e)
+        {
+            // check answers
+        }
+
+
+        private void CreateExitButton()
+        {
+            Button exitButton = new Button();
+
+            int buttonWidth =  answersSurface.Width / 13;
+            int buttonHeight = 2 * answersSurface.Height / 27 - 10;
+
+            exitButton.Text = "Exit";
+
+            exitButton.AutoSize = false;
+            exitButton.Size = new System.Drawing.Size(buttonWidth, buttonHeight);
+            
+            exitButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            exitButton.Location = new System.Drawing.Point(answersSurface.Width - buttonWidth - 4,
+                                                           answersSurface.Height - buttonHeight);
+
+            exitButton.Click += new EventHandler(exit_Click);
+
+            answersSurface.Controls.Add(exitButton);
+        }
+
+        private void exit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
         private void CustomizeTimeView()
         {
             answersSurface.Controls.Add(timeView);
@@ -53,9 +116,19 @@ namespace ThePragueTest
 
         private void timer_Tick(object sender, EventArgs e)
         {
+            if(time.Minutes == 0 && time.Seconds == 0)
+            {
+                // check the result and print the output
+            }
+
             time = time.Subtract(second);
-            timeView.Text = time.ToString().Split(':')[1] + ":" +
+            timeView.Text = "Time left: " + time.ToString().Split(':')[1] + ":" +
                             time.ToString().Split(':')[2];
+        }
+
+        private void CheckResults()
+        {
+
         }
 
         private void InitializeAnswersSurface()
@@ -76,6 +149,9 @@ namespace ThePragueTest
                         verticalOffset
 
                         );
+
+                    // store the input in order to check it later
+                    inputs[answerNumbers[4 * i + j]] = answerControl.NumberInput;
 
                     answerControl.Location = new System.Drawing.Point(
 
