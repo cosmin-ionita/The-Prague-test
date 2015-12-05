@@ -31,6 +31,7 @@ namespace ThePragueTestControls
         public void SetSize(int width, int height)
         {
             bigNumber.Height = height / 2;
+            smallNumber.Height = height / 2;
 
             Width = width;
             Height = height;

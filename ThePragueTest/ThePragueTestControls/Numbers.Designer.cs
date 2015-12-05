@@ -50,7 +50,7 @@
             this.smallNumber.Size = new System.Drawing.Size(111, 13);
             this.smallNumber.TabIndex = 1;
             this.smallNumber.Text = "Small Number";
-            this.smallNumber.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.smallNumber.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // Numbers
             // 
