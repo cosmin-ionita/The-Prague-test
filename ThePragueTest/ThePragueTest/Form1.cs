@@ -22,6 +22,12 @@ namespace ThePragueTest
             InitializeNumbers();
 
             InitializeNumbersSurface();
+            InitializeAnswersSurface();
+        }
+
+        private void InitializeAnswersSurface()
+        {
+            
         }
 
         private void InitializeNumbersSurface()
