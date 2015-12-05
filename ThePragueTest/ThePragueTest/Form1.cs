@@ -18,7 +18,9 @@ namespace ThePragueTest
             InitializeComponent();
 
             CreateTestSurface();
+
             InitializeNumbers();
+
             InitializeNumbersSurface();
         }
 
@@ -33,18 +35,18 @@ namespace ThePragueTest
                 {
                     Numbers numberControl = new Numbers(
 
-                        numberControlWidth,
-                        numberControlHeight,
+                        numberControlWidth + 15,
+                        numberControlHeight + 3,
 
                         bigNumbers[10 * i + j],
                         smallNumbers[10 * i + j]
-                        
+                      
                         );
 
                     numberControl.Location = new System.Drawing.Point(
                         
-                        i * numberControlWidth,
-                        j * numberControlHeight
+                        j * numberControlWidth - 14,
+                        i * numberControlHeight - 2
                         
                         );
 
