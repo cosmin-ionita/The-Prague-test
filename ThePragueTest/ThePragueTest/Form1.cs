@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using ThePragueTestControls;
+using System.Linq;
 
 namespace ThePragueTest
 {
@@ -16,7 +17,7 @@ namespace ThePragueTest
         TimeSpan time = new TimeSpan(0, 4, 0);
         TimeSpan second = new TimeSpan(0, 0, 1);
 
-        TextBox[] inputs = new TextBox[100];
+        TextBox[] inputs = new TextBox[101];
 
         Label timeView = new Label();
 
@@ -42,7 +43,6 @@ namespace ThePragueTest
         {
             CreateExitButton();
             CreateCheckButton();
-            
         }
 
         private void CreateCheckButton()
@@ -52,15 +52,14 @@ namespace ThePragueTest
             int buttonWidth = answersSurface.Width / 13;
             int buttonHeight = 2 * answersSurface.Height / 27 - 10;
 
-            checkButton.Text = "Check";
-
             checkButton.AutoSize = false;
             checkButton.Size = new System.Drawing.Size(buttonWidth, buttonHeight);
 
+            checkButton.Text = "Check";
             checkButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+
             checkButton.Location = new System.Drawing.Point(answersSurface.Width - buttonWidth - 4,
                                                             answersSurface.Height - 2 * buttonHeight);
-
             checkButton.Click += new EventHandler(check_Click);
 
             answersSurface.Controls.Add(checkButton);
@@ -68,9 +67,12 @@ namespace ThePragueTest
 
         private void check_Click(object sender, EventArgs e)
         {
-            // check answers
-        }
+            for(int i = 1; i<=100; i++)
+                if (inputs[i].Text == "")
+                    return;
 
+            CheckResults();
+        }
 
         private void CreateExitButton()
         {
@@ -79,15 +81,14 @@ namespace ThePragueTest
             int buttonWidth =  answersSurface.Width / 13;
             int buttonHeight = 2 * answersSurface.Height / 27 - 10;
 
-            exitButton.Text = "Exit";
-
             exitButton.AutoSize = false;
             exitButton.Size = new System.Drawing.Size(buttonWidth, buttonHeight);
-            
+
+            exitButton.Text = "Exit";
             exitButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+
             exitButton.Location = new System.Drawing.Point(answersSurface.Width - buttonWidth - 4,
                                                            answersSurface.Height - buttonHeight);
-
             exitButton.Click += new EventHandler(exit_Click);
 
             answersSurface.Controls.Add(exitButton);
@@ -118,7 +119,7 @@ namespace ThePragueTest
         {
             if(time.Minutes == 0 && time.Seconds == 0)
             {
-                // check the result and print the output
+                CheckResults();
             }
 
             time = time.Subtract(second);
@@ -128,7 +129,17 @@ namespace ThePragueTest
 
         private void CheckResults()
         {
+            int points = 0;
 
+            for(int i = 0; i<100; i++)
+            {
+                if(inputs[i+1].Text.Equals(smallNumbers[Array.IndexOf(bigNumbers, i+1)].ToString()) == true)
+                {
+                    points += 1;
+                }
+            }
+
+            MessageBox.Show("You have won " + points.ToString() + " points!");
         }
 
         private void InitializeAnswersSurface()
@@ -204,7 +215,7 @@ namespace ThePragueTest
 
                 19,24,72,51,62,81,9,91,17,61,30,41,98,80,66,59,55,95,58,6,
 
-                54,21,45,84,99,75,56,10,67,38,3,93,2,30,44,77,82,36,32,88,
+                54,21,45,84,99,75,56,10,67,38,3,93,2,20,44,77,82,36,32,88,
 
                 42,94,50,76,90,71,53,5,27,13,57,63,48,68,39,29,16,52,60,89,
 

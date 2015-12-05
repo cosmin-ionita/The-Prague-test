@@ -43,6 +43,13 @@ namespace ThePragueTestControls
             numberToGuessLabel.Size = new System.Drawing.Size(width / 2, height);
         }
 
-        public TextBox NumberInput { get; private set; }
+        public TextBox NumberInput
+        {
+            get
+            {
+                return numberInput;
+            }
+
+        }
     }
 }
