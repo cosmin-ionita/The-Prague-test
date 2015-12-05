@@ -28,70 +28,49 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.numberToGuess = new System.Windows.Forms.Panel();
-            this.numberInputPanel = new System.Windows.Forms.Panel();
-            this.numberInput = new System.Windows.Forms.TextBox();
             this.numberToGuessLabel = new System.Windows.Forms.Label();
-            this.numberToGuess.SuspendLayout();
-            this.numberInputPanel.SuspendLayout();
+            this.numberInput = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
-            // 
-            // numberToGuess
-            // 
-            this.numberToGuess.Controls.Add(this.numberToGuessLabel);
-            this.numberToGuess.Location = new System.Drawing.Point(0, 0);
-            this.numberToGuess.Name = "numberToGuess";
-            this.numberToGuess.Size = new System.Drawing.Size(104, 41);
-            this.numberToGuess.TabIndex = 0;
-            // 
-            // numberInputPanel
-            // 
-            this.numberInputPanel.AutoSize = true;
-            this.numberInputPanel.Controls.Add(this.numberInput);
-            this.numberInputPanel.Location = new System.Drawing.Point(101, 0);
-            this.numberInputPanel.Name = "numberInputPanel";
-            this.numberInputPanel.Size = new System.Drawing.Size(108, 44);
-            this.numberInputPanel.TabIndex = 1;
-            // 
-            // numberInput
-            // 
-            this.numberInput.Location = new System.Drawing.Point(0, 0);
-            this.numberInput.Multiline = true;
-            this.numberInput.Name = "numberInput";
-            this.numberInput.Size = new System.Drawing.Size(105, 41);
-            this.numberInput.TabIndex = 0;
             // 
             // numberToGuessLabel
             // 
-            this.numberToGuessLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.numberToGuessLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.numberToGuessLabel.Dock = System.Windows.Forms.DockStyle.Left;
             this.numberToGuessLabel.Location = new System.Drawing.Point(0, 0);
             this.numberToGuessLabel.Name = "numberToGuessLabel";
-            this.numberToGuessLabel.Size = new System.Drawing.Size(104, 41);
+            this.numberToGuessLabel.Size = new System.Drawing.Size(42, 39);
             this.numberToGuessLabel.TabIndex = 0;
             this.numberToGuessLabel.Text = "label1";
             this.numberToGuessLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // numberInput
+            // 
+            this.numberInput.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.numberInput.Dock = System.Windows.Forms.DockStyle.Right;
+            this.numberInput.Location = new System.Drawing.Point(99, 0);
+            this.numberInput.MinimumSize = new System.Drawing.Size(1, 1);
+            this.numberInput.Multiline = true;
+            this.numberInput.Name = "numberInput";
+            this.numberInput.Size = new System.Drawing.Size(105, 39);
+            this.numberInput.TabIndex = 0;
+            this.numberInput.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // AnswersControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.numberInputPanel);
-            this.Controls.Add(this.numberToGuess);
+            this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Controls.Add(this.numberToGuessLabel);
+            this.Controls.Add(this.numberInput);
             this.Name = "AnswersControl";
-            this.Size = new System.Drawing.Size(206, 41);
-            this.numberToGuess.ResumeLayout(false);
-            this.numberInputPanel.ResumeLayout(false);
-            this.numberInputPanel.PerformLayout();
+            this.Size = new System.Drawing.Size(204, 39);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel numberToGuess;
         private System.Windows.Forms.Label numberToGuessLabel;
-        private System.Windows.Forms.Panel numberInputPanel;
         private System.Windows.Forms.TextBox numberInput;
     }
 }

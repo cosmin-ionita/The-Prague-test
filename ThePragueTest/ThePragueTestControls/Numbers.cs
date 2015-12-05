@@ -19,7 +19,7 @@ namespace ThePragueTestControls
         private void SetStyle()
         {
             bigNumber.Font = new System.Drawing.Font("Times New Roman", 22, System.Drawing.FontStyle.Bold);
-            //smallNumber.Font = new System.Drawing.Font("Times New Roman", 12, System.Drawing.FontStyle.Regular);
+            smallNumber.Font = new System.Drawing.Font("Times New Roman", 12, System.Drawing.FontStyle.Regular);
         }
 
         public void SetNumbers(int bigNumber, int smallNumber)

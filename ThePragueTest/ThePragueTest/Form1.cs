@@ -27,7 +27,33 @@ namespace ThePragueTest
 
         private void InitializeAnswersSurface()
         {
-            
+            int verticalOffset = answersSurface.Height / 27;
+            int horizontalOffset = answersSurface.Width / 13;
+
+            for (int i = 0; i < 25; i++)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+                    AnswersControl answerControl = new AnswersControl(
+
+                        answerNumbers[4 * i + j],
+
+                        2 * horizontalOffset,
+
+                        verticalOffset
+
+                        );
+
+                    answerControl.Location = new System.Drawing.Point(
+
+                        (j + 1) * horizontalOffset + j * answerControl.Width,
+                        (i + 1) * (answerControl.Height + 1)
+
+                        );
+
+                    answersSurface.Controls.Add(answerControl);
+                }
+            }
         }
 
         private void InitializeNumbersSurface()
@@ -35,9 +61,9 @@ namespace ThePragueTest
             int numberControlWidth = numbersSurface.Width / 10;
             int numberControlHeight = numbersSurface.Height / 10;
 
-            for(int i = 0; i<10; i++)
+            for (int i = 0; i < 10; i++)
             {
-                for(int j = 0; j<10; j++)
+                for (int j = 0; j < 10; j++)
                 {
                     Numbers numberControl = new Numbers(
 
@@ -46,14 +72,14 @@ namespace ThePragueTest
 
                         bigNumbers[10 * i + j],
                         smallNumbers[10 * i + j]
-                      
+
                         );
 
                     numberControl.Location = new System.Drawing.Point(
-                        
+
                         j * numberControlWidth - 14,
-                        i * numberControlHeight - 2
-                        
+                        i * numberControlHeight // -2
+
                         );
 
                     numbersSurface.Controls.Add(numberControl);

@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ThePragueTestControls
@@ -19,6 +12,14 @@ namespace ThePragueTestControls
             SetSize(width, height);
 
             SetNumber(number);
+
+            SetAnswerStyle();
+        }
+
+        private void SetAnswerStyle()
+        {
+            numberToGuessLabel.Font = new System.Drawing.Font("Times New Roman", 18, System.Drawing.FontStyle.Bold);
+            numberInput.Font = new System.Drawing.Font("Times New Roman", 18, System.Drawing.FontStyle.Regular);
         }
 
         private void SetNumber(int number)
@@ -30,6 +31,16 @@ namespace ThePragueTestControls
         {
             Width = width;
             Height = height;
+
+            SetInputDimensions(width, height);
+        }
+
+        private void SetInputDimensions(int width, int height)
+        {
+            numberInput.Size = new System.Drawing.Size(width / 2, height);
+            numberInput.TextAlign = HorizontalAlignment.Center;
+
+            numberToGuessLabel.Size = new System.Drawing.Size(width / 2, height);
         }
     }
 }

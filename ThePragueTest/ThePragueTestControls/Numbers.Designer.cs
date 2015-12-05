@@ -45,7 +45,6 @@
             // smallNumber
             // 
             this.smallNumber.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.smallNumber.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.smallNumber.Location = new System.Drawing.Point(0, 85);
             this.smallNumber.Name = "smallNumber";
             this.smallNumber.Size = new System.Drawing.Size(111, 13);
