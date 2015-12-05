@@ -46,7 +46,7 @@
             // 
             this.smallNumber.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.smallNumber.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.smallNumber.Location = new System.Drawing.Point(0, 99);
+            this.smallNumber.Location = new System.Drawing.Point(0, 85);
             this.smallNumber.Name = "smallNumber";
             this.smallNumber.Size = new System.Drawing.Size(111, 13);
             this.smallNumber.TabIndex = 1;
@@ -61,7 +61,7 @@
             this.Controls.Add(this.smallNumber);
             this.Controls.Add(this.bigNumber);
             this.Name = "Numbers";
-            this.Size = new System.Drawing.Size(111, 112);
+            this.Size = new System.Drawing.Size(111, 98);
             this.ResumeLayout(false);
 
         }
