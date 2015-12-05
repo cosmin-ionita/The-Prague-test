@@ -42,6 +42,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AnswersControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AnswersControl.Designer.cs">
+      <DependentUpon>AnswersControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Numbers.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -51,6 +57,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="AnswersControl.resx">
+      <DependentUpon>AnswersControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Numbers.resx">
       <DependentUpon>Numbers.cs</DependentUpon>
     </EmbeddedResource>
