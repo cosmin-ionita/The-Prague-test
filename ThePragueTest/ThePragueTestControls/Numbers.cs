@@ -5,10 +5,20 @@ namespace ThePragueTestControls
 {
     public partial class Numbers : UserControl
     {
+        public event EventHandler buttonClick;
+
+        protected void buttonClick_drag(object sender, EventArgs e)
+        {
+            if(this.buttonClick != null)
+            {
+                this.buttonClick(this, e);
+            }
+        }
+
         public Numbers(int width, int height, int bigNumber, int smallNumber)
         {
             InitializeComponent();
-
+            
             SetNumbers(bigNumber, smallNumber);
 
             SetStyle();

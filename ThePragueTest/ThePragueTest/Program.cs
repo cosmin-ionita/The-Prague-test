@@ -14,9 +14,12 @@ namespace ThePragueTest
         [STAThread]
         static void Main()
         {
+            // Aici se incarca interfata grafica
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            
+            //II spunem sa porneasca cu afisarea clasei FirstPage
+            Application.Run(new FirstPage());
         }
     }
 }

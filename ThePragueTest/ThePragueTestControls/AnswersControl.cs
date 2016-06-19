@@ -16,12 +16,15 @@ namespace ThePragueTestControls
             SetAnswerStyle();
         }
 
+        // Setam fonturile inputului si label-ului
+
         private void SetAnswerStyle()
         {
             numberToGuessLabel.Font = new System.Drawing.Font("Times New Roman", 18, System.Drawing.FontStyle.Bold);
             numberInput.Font = new System.Drawing.Font("Times New Roman", 18, System.Drawing.FontStyle.Regular);
         }
 
+        // Setam numarul din label
         private void SetNumber(int number)
         {
             numberToGuessLabel.Text = number.ToString();

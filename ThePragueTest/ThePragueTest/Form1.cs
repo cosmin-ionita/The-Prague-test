@@ -1,24 +1,31 @@
 ﻿using System;
 using System.Windows.Forms;
 using ThePragueTestControls;
-using System.Linq;
 
 namespace ThePragueTest
 {
     public partial class Form1 : Form
-    {
+    {   // Vectorii care retin numerele
         private int[] bigNumbers;
         private int[] smallNumbers;
         private int[] answerNumbers;
 
+        // Cele doua suprafete de lucru (stanga - numere, dreapta - raspunsuri)
         Panel numbersSurface = new Panel();
         Panel answersSurface = new Panel();
 
+        // Timpul - initial avem 0 ore, 4 minute si 0 secunde
         TimeSpan time = new TimeSpan(0, 4, 0);
+
+        // Secunda - tot un obiect de tip TimeSpan. Din time vom scadea
+        // o secunda la fiecare apel al metodei Tick().
         TimeSpan second = new TimeSpan(0, 0, 1);
 
+        // Vom stoca toate inputurile (casutele in care o sa scrie
+        // userul intr-un vector de TextBox-uri
         TextBox[] inputs = new TextBox[101];
 
+        // Prin acest label o sa vedem timpul
         Label timeView = new Label();
 
         public Form1()
@@ -65,6 +72,11 @@ namespace ThePragueTest
             answersSurface.Controls.Add(checkButton);
         }
 
+        /*  Aceasta este metoda butonului de check. Butonul check se activeaza atunci cand 
+            userul termina de completat tabla de joc in mai putin de 4 minute. Aici verificam
+            daca exista vreun input necompletat. Daca exista, nu facem nimic, altfel verificam
+            rezultatele
+            */
         private void check_Click(object sender, EventArgs e)
         {
             for(int i = 1; i<=100; i++)
@@ -74,6 +86,12 @@ namespace ThePragueTest
             CheckResults();
         }
 
+        /*
+            Aici cream butonul de exit, il pozitionam in dreapta jos, ii dam dimensiunea
+            si ii atribuim handler-ul de eveniment redat prin metoda exit_Click, dupa care
+            il adaugam la answersSurface
+
+            */
         private void CreateExitButton()
         {
             Button exitButton = new Button();
@@ -84,7 +102,7 @@ namespace ThePragueTest
             exitButton.AutoSize = false;
             exitButton.Size = new System.Drawing.Size(buttonWidth, buttonHeight);
 
-            exitButton.Text = "Exit";
+            exitButton.Text = "Exit"; 
             exitButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 
             exitButton.Location = new System.Drawing.Point(answersSurface.Width - buttonWidth - 4,
@@ -98,6 +116,14 @@ namespace ThePragueTest
         {
             Application.Exit();
         }
+
+        /*
+            Aici setam modul in care timpul o sa apara pe ecran. El o sa fie
+            pozitionat in dreapta sus, evident pe panoul de raspunsuri pentru ca
+            nu avem unde in alta parte sa il pozitionam. 
+
+            Prin Dock ii spunem sa fie situat in partea de sus.
+            */
         private void CustomizeTimeView()
         {
             answersSurface.Controls.Add(timeView);
@@ -109,23 +135,55 @@ namespace ThePragueTest
             timeView.Font = new System.Drawing.Font("Times New Roman", 14, System.Drawing.FontStyle.Bold);
         }
 
+
+        /*
+            Un timer este un obiect special, legat strict de Windows Forms, care
+            are un rol foarte simplu: apeleaza o metoda la un interval de timp specificat.
+
+            In metoda de mai jos se realizeaza configurarea acestuia. Adica ii spunem
+            ce metoda sa apeleze la intervalul default de 1000 de ms ( = 1 secunda), in 
+            cazul nostru metoda se numeste timer_Tick, si il pornim prin apelul metodei
+            Start().
+
+            Evident, ii putem seta intervalul la care sa apeleze respectiva metoda, asa
+            cum se vede in linia comentata
+
+            */
         private void SetTimer()
         {
             timer.Tick += new EventHandler(timer_Tick);
+            // Exemplu: timer.Interval = 500;
             timer.Start();
         }
 
+
+
+        /* Aceasta este metoda apelata de catre timer la fiecare secunda
+
+           Ce se realizeaza aici: se scade din timpul total o secunda, dupa
+           care se afiseaza timpul nou rezultat. Daca am ajuns la timp 0, atunci
+           oprim timer-ul si verificam rezultatele dupa care inchidem aplicatia.
+
+        */
         private void timer_Tick(object sender, EventArgs e)
         {
-            if(time.Minutes == 0 && time.Seconds == 0)
-            {
-                CheckResults();
-            }
-
             time = time.Subtract(second);
             timeView.Text = "Time left: " + time.ToString().Split(':')[1] + ":" +
                             time.ToString().Split(':')[2];
+
+            if (time.Minutes == 0 && time.Seconds == 0)
+            {
+                timer.Stop();
+                CheckResults();
+                Application.Exit();
+            }
         }
+
+        /*
+            Aici verificam rezultatele. Atunci cand timpul a expirat sau cand s-a apasat
+            butonul de "Check", se face call catre aceasta functie. 
+            Este o verificare simpla, cu contorizarea raspunsurilor corecte.
+         */
 
         private void CheckResults()
         {
@@ -142,11 +200,30 @@ namespace ThePragueTest
             MessageBox.Show("You have won " + points.ToString() + " points!");
         }
 
+        /* Ideea este similara celei de la functia InitializeNumbersSurface, numai ca
+           panoul este impartit un pic diferit: un answer control este format dintr-un
+           label in care ne apare numarul al carui corespundent il cautam, si dintr-un
+           textBox in care introducem respectivul numar. 
+           
+           Pentru o impartire exacta a panoului, vom alege ca unitate atomica de divizare
+           jumatatea unui answer control, adica dimensiunea unui label dintr-un answer 
+           control, care este egala cu dimensiunea unui textBox din acelasi control.
+
+            Astfel, latimea panoului o vom imparti la 13, pentru ca avem 4 randuri de controale,
+            fiecare avand 2 atomi, deci 8 atomi in total. Intre aceste 4 randuri, mai avem 3 atomi
+            (zona libera), deci 11 in total, si inca 2 atomi la capete, de unde rezulta acel 13.
+
+            Pe inaltime, fiecare coloana are 25 de controale, adica 25 de inaltimi de atomi la care
+            adaugam 2 latimi la capete (adica sus si jos) de unde rezulta 27 de atomi.
+        
+        */
         private void InitializeAnswersSurface()
         {
             int verticalOffset = answersSurface.Height / 27;
             int horizontalOffset = answersSurface.Width / 13;
 
+            // Parcurgerea o facem normal, numai ca iteram peste controalele noastre,
+            // nu ne intereseaza zonele libere dintre controale
             for (int i = 0; i < 25; i++)
             {
                 for (int j = 0; j < 4; j++)
@@ -161,7 +238,6 @@ namespace ThePragueTest
 
                         );
 
-                    // store the input in order to check it later
                     inputs[answerNumbers[4 * i + j]] = answerControl.NumberInput;
 
                     answerControl.Location = new System.Drawing.Point(
@@ -176,6 +252,14 @@ namespace ThePragueTest
             }
         }
 
+        /*
+            Aici initializam zona de numere, adica in panoul numbersSurface trebuie sa adaugam
+            controalele noastre denumite Numbers. Cu alte cuvinte, vom imparti acest panou intr-o
+            matrice de 10 x 10 si vom pozitiona fiecare control de tip Numbers la locatia lui exacta,
+            atribuindu-i acelasi timp si cele doua numere (big si small).
+
+        */
+
         private void InitializeNumbersSurface()
         {
             int numberControlWidth = numbersSurface.Width / 10;
@@ -185,6 +269,8 @@ namespace ThePragueTest
             {
                 for (int j = 0; j < 10; j++)
                 {
+                    // Aici construim efectiv obiectul, pasandu-i ca parametrii
+                    // in constructor dimensiunea lui si cele doua numere.
                     Numbers numberControl = new Numbers(
 
                         numberControlWidth + 15,
@@ -195,17 +281,24 @@ namespace ThePragueTest
 
                         );
 
+                    // Setam locatia controlului. Acel -14 este o ajustare a pozitiei
                     numberControl.Location = new System.Drawing.Point(
 
                         j * numberControlWidth - 14,
-                        i * numberControlHeight // -2
+                        i * numberControlHeight
 
                         );
 
+                    // Adaugam controlul la panoul de numere
                     numbersSurface.Controls.Add(numberControl);
                 }
             }
         }
+
+        /* Aici e destul de clar ce facem. Numerele nu le putem genera
+           random pentru ca testul in sine nu ne permite acest lucru, 
+           din moment ce sunt unele numere pozitionate de 2 ori
+        */
 
         private void InitializeNumbers()
         {
@@ -249,20 +342,32 @@ namespace ThePragueTest
             };
         }
 
+        /* In aceasta metoda o sa impartim ecranul in cele 2 parti, dupa care vom
+           initializa cele doua Panel-uri: numbersSurface si answersSurface si le
+           vom adauga la fereastra principala (adica la this).
+        */
+
         public void CreateTestSurface()
         {
+            // Setam lungimea si latimea panoului de numere (cel din stanga). Pozitia
+            // lui este direct 0,0, deci nu trebuie sa o ajustam.
+            // Functia Screen.FromControl(this) obtine dimensiunile reale ale ecranului
             numbersSurface.Width = Screen.FromControl(this).Bounds.Width / 2;
             numbersSurface.Height = Screen.FromControl(this).Bounds.Height;
 
+            // Panoul de raspunsuri trebuie pozitionat la (jumatateaea ecranului, 0)
             answersSurface.Location = new System.Drawing.Point(
                 Screen.FromControl(this).Bounds.Width / 2, 0);
 
             answersSurface.Width = Screen.FromControl(this).Bounds.Width / 2 + 1;
             answersSurface.Height = Screen.FromControl(this).Bounds.Height;
 
+            // Setam marginea panourilor la FixedSingle, pentru a o ascunde.
             answersSurface.BorderStyle = BorderStyle.FixedSingle;
             numbersSurface.BorderStyle = BorderStyle.FixedSingle;
 
+            // Adaugam cele doua panouri la fereastra principala (la this), dar
+            // nu mai punem this pentru ca e redundant.
             Controls.Add(answersSurface);
             Controls.Add(numbersSurface);
         }
