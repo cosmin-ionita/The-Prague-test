@@ -10,5 +10,7 @@ button in order to avoid the situation in which you finish all the fields in 2 m
 
 However, nobody finished all the fields in 4 minutes.
 
+I hope you like it!
+
 ![](https://github.com/ionitacosmin95/The-Prague-test/blob/master/ThePragueTest/Images/ThePragueTest.png)
 
