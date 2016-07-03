@@ -1,2 +1,2 @@
 language: csharp
-solution: ThePragueTest.sln
+solution: ThePragueTest/ThePragueTest.sln
