@@ -1,4 +1,7 @@
 # The-Prague-test
+
+[![Build Status](https://travis-ci.org/ionitacosmin95/The-Prague-test.svg?branch=master)](https://travis-ci.org/ionitacosmin95/The-Prague-test)
+
 This is a Windows Forms application that emulates the Prague Test, which is a distributed attention exercise.
 
 Basically, the screen is split vertically by two fields: the left one, with a matrix of squares composed of two numbers: a big one and a small one, and the right field,
